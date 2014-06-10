@@ -20,6 +20,8 @@ PKG_SOURCE_URL:=@SF/$(PKG_NAME)
 PKG_LICENSE:=BSD-3c
 PKG_LICENSE_FILES:=COPYRIGHT
 
+PKG_MAINTAINER:=Felix Fietkau <nbd@openwrt.org>
+
 PKG_FIXUP:=autoreconf
 PKG_INSTALL:=1
 
@@ -36,14 +38,6 @@ define Package/strace/description
 A useful diagnostic, instructional, and debugging tool. Allows you to track what
 system calls a program makes while it is running.
 endef
-
-# needed when compiling against Linux 2.4
-CONFIGURE_VARS += \
-	ac_cv_header_linux_netlink_h=yes
-
-ifneq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
-  TARGET_CPPFLAGS += -I$(LINUX_DIR)/include
-endif
 
 MAKE_FLAGS := \
 	CCOPT="$(TARGET_CFLAGS)"
